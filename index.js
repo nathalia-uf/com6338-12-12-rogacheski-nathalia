@@ -26,16 +26,45 @@ class Word {
   }
 
   // implement the guessLetter function:
-  // guessLetter(letter) {}
+guessLetter(letter) {
+  this.letter = letter
+  const incorrectText = document.getElementById(`incorrect-Letters`);
+  const remainingGuessesText = document.getElementById(`remaining-guesses`);
+  const wordGuessText = document.getElementById(`word-to-guess`);
+
+  incorrectText.textContent = ""
+  remainingGuessesText.textContent = this.remainingGuesses
+  wordGuessText.textContent = this.displayWord
+  console.log(letter)
+
+  for (var i = 0; i < this.word.length; i++) {
+      if (this.word.includes(letter) && !this.correctLetters.includes(letter)) {
+          this.correctLetters.push(letter)
+          this.displayWord += this.letter
+          console.log(correctLetters)
+      }
+      else {
+          this.remainingGuesses--;
+          this.incorrectLetters.push(letter)
+          this.displayWord += "_"
+      } 
+  } 
+} 
 
   // implement the updateScreen function:
-  // updateScreen() {}
+  updateScreen() {
+
+  }
 
   // implement the isGameOver function:
-  // isGameOver() {}
+isGameOver() {
+
+}
 
   // implement the getWinOrLoss function:
-  // getWinOrLoss() {}
+getWinOrLoss() {
+  
+}
 }
 
 function newGame() {
@@ -62,7 +91,7 @@ document.onkeyup = function(e) {
     const previousWord = document.getElementById('previous-word')
     const winDisplay = document.getElementById('wins')
     const lossDisplay = document.getElementById('losses')
-    previousWord.textContent = currentWord.word
+    previousWord.textContent = displayWord
     const result = currentWord.getWinOrLoss()
     if (result === 'win') {
       wins++
