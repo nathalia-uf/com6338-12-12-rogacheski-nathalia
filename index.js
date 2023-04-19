@@ -48,13 +48,9 @@ guessLetter(letter) {
   }
   // implement the updateScreen function:
   updateScreen() {
-    const wordGuessText = document.getElementById(`word-to-guess`);
-    const remainingGuessesText = document.getElementById(`remaining-guesses`);
-    const incorrectText = document.getElementById(`incorrect-letters`);
-
-    wordGuessText.textContent = this.displayWord;
-    remainingGuessesText.textContent = this.remainingGuesses;
-    incorrectText.textContent = this.incorrectLetters.join(" ");
+    document.getElementById("remaining-guesses").textContent = this.remainingGuesses;
+    document.getElementById("incorrect-letters").textContent = this.incorrectLetters;
+    document.getElementById("word-to-guess").textContent = this.displayWord;
   }
 
   // implement the isGameOver function:
