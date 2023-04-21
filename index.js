@@ -26,43 +26,47 @@ class Word {
   }
 
   // implement the guessLetter function:
-guessLetter(letter) {
-  const incorrectText = document.getElementById(`incorrect-letters`);
-  const remainingGuessesText = document.getElementById(`remaining-guesses`);
-  const wordGuessText = document.getElementById(`word-to-guess`);
+  guessLetter(letter) {
+    let wordArray = this.word.split('')
+    let displayArray = this.displayWord.split('')
+    let correct = false
+    for (var i = 0; i < wordArray.length; i++){
+      if (wordArray[i] == letter){
+        correct = true
+        this.correctLetters.push(letter)
+        displayArray[i] = letter
+      }else{
 
-    if (!this.word.includes(letter)) {
-      this.remainingGuesses--;
-      this.incorrectLetters.push(letter);
-    } else if (!this.correctLetters.includes(letter)) {
-      this.correctLetters.push(letter);
-      for (let i = 0; i < this.word.length; i++) {
-        if (this.word[i] === letter) {
-          this.displayWord = this.displayWord.substr(0, i) + letter + this.displayWord.substr(i + 1);
-        }
       }
     }
-    incorrectText.textContent = this.incorrectLetters.join(" ");
-    remainingGuessesText.textContent = this.remainingGuesses;
-    wordGuessText.textContent = this.displayWord;
+    if (correct === true) {
+      this.displayWord = displayArray.join('')
+    }else{
+      this.remainingGuesses--
+      this.incorrectLetters.push(letter)
+    }
   }
   // implement the updateScreen function:
   updateScreen() {
-    document.getElementById("remaining-guesses").textContent = this.remainingGuesses;
-    document.getElementById("incorrect-letters").textContent = this.incorrectLetters;
+    document.getElementById("remaining-guesses").textContent = this.remainingGuesses
+    document.getElementById("incorrect-letters").textContent = this.incorrectLetters
     document.getElementById("word-to-guess").textContent = this.displayWord;
   }
 
   // implement the isGameOver function:
 isGameOver() {
-  return (this.remainingGuesses < 1 || this.displayWord === this.word);
+  if (this.remainingGuesses <= 0 || this.word === this.displayWord){
+    return true
+  }else{
+    return false
   }
+}
 
   // implement the getWinOrLoss function:
 getWinOrLoss() {
     if (this.displayWord === this.word && this.remainingGuesses > 0) {
       return "win";
-    } else if (this.remainingGuesses < 1) {
+    } else if (this.word !== this.displayWord && this.remainingGuesses <= 0){
       return "loss";
     } else {
       return null;
